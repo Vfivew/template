@@ -8,8 +8,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "~/libs/redux/example-hooks.ts";
-import { addUser } from "~/libs/redux/example-slice.ts";
+import { useAppDispatch, useAppSelector } from "~/modules/example-hooks.ts";
+import { addUser } from "~/modules/example-slice.ts";
 
 import styles from "./styles.module.css";
 

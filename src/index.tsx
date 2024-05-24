@@ -7,7 +7,7 @@ import { App } from "./app/app.tsx";
 import { RouterProvider, StoreProvider } from "./components/index.tsx";
 import "./i18n.ts";
 import { AppRoute } from "./libs/enum/index.ts";
-import { store } from "./libs/redux/store.ts";
+import { store } from "./modules/store.ts";
 import { Auth } from "./pages/auth/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
