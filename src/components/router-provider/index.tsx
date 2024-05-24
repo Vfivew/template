@@ -3,6 +3,7 @@ import {
 	type RouteObject,
 	createBrowserRouter,
 } from "react-router-dom";
+import React from "react";
 
 type Properties = {
 	routes: RouteObject[];

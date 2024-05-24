@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Container from "@mui/material/Container";
@@ -9,6 +10,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 import { addUser } from "~/libs/redux/example-slice";
 import { useAppDispatch, useAppSelector } from "~/libs/redux/example-hooks";
+
+import styles from "./styles.module.css";
 
 type FormData = {
 	firstName: string;
@@ -28,17 +31,16 @@ const ExampleForm: React.FC = () => {
 	} = useForm<FormData>({
 		mode: "onBlur",
 	});
+
 	const onSubmit = handleSubmit(({ firstName, lastName }) => {
 		dispatch(addUser({ firstName, lastName }));
 		reset();
 	});
 
 	return (
-		<Container maxWidth="sm">
+		<Container maxWidth="sm" className={styles["form"]}>
 			<Box component="form" onSubmit={onSubmit} noValidate>
-				<Typography variant="h6">
-					{t("ExampleComponent.firstName")}
-				</Typography>
+				<Typography variant="h6">{t("ExampleComponent.firstName")}</Typography>
 				<TextField
 					fullWidth
 					margin="normal"
@@ -52,13 +54,9 @@ const ExampleForm: React.FC = () => {
 					error={!!errors.firstName}
 				/>
 				{errors.firstName && (
-					<FormHelperText error>
-						{errors.firstName.message}
-					</FormHelperText>
+					<FormHelperText error>{errors.firstName.message}</FormHelperText>
 				)}
-				<Typography variant="h6">
-					{t("ExampleComponent.lastName")}
-				</Typography>
+				<Typography variant="h6">{t("ExampleComponent.lastName")}</Typography>
 				<TextField
 					fullWidth
 					margin="normal"
@@ -72,16 +70,14 @@ const ExampleForm: React.FC = () => {
 					error={!!errors.lastName}
 				/>
 				{errors.lastName && (
-					<FormHelperText error>
-						{errors.lastName.message}
-					</FormHelperText>
+					<FormHelperText error>{errors.lastName.message}</FormHelperText>
 				)}
 				<Button
 					variant="contained"
 					color="primary"
 					type="submit"
 					disabled={!isValid}
-					sx={{ mt: 3 }}
+					sx={{ mt: 3, color: 'text.active' }}
 				>
 					{t("ExampleComponent.submit")}
 				</Button>
