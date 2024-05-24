@@ -7,7 +7,11 @@ import eslintReactRefresh from 'eslint-plugin-react-refresh';
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import typesafe from 'eslint-plugin-typesafe'
-import airbnbConfig from 'eslint-config-airbnb-base';
+import importPlugin from "eslint-plugin-import";
+import { resolve as tsResolver } from "eslint-import-resolver-typescript";
+import perfectionist from "eslint-plugin-perfectionist"
+import sonarjs from "eslint-plugin-sonarjs";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default tseslint.config(
@@ -19,10 +23,20 @@ export default tseslint.config(
       'react-refresh': eslintReactRefresh,
       'typesafe': typesafe,
       prettier: prettierPlugin,
+      import: importPlugin,
+      perfectionist: perfectionist,
+      sonarjs:sonarjs,
+      "jsx-a11y":jsxA11y
     },
     settings: {
       react: {
         version: "18.2",
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: tsResolver,
       },
     },
   },
@@ -49,6 +63,29 @@ export default tseslint.config(
       ...js.configs.recommended.rules,
       ...prettierPlugin.configs.recommended.rules,
       ...eslintConfigPrettier.rules,
+      ...importPlugin.configs.recommended.rules,
+      ...perfectionist.configs['recommended-natural'].rules,
+      ...sonarjs.configs.recommended.rules,
+      ...eslintReact.configs["jsx-runtime"].rules,
+      ...eslintReact.configs["recommended"].rules,
+      ...eslintReactHooks.configs.recommended.rules,
+      ...jsxA11y.configs.recommended.rules,
+      "react/jsx-boolean-value": ["error"],
+      "react/jsx-curly-brace-presence": ["error"],
+      "react/jsx-no-bind": ["error", { ignoreRefs: true }],
+      "react/self-closing-comp": ["error"],
+      "import/exports-last": ["error"],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          js: "always",
+          tsx: "always",
+          ts: "always"
+        },
+      ],
+      "import/newline-after-import": ["error"],
+      "import/no-duplicates": ["error"],
       "max-params": ["error", 3],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'prefer-const': 'error',
@@ -84,6 +121,7 @@ export default tseslint.config(
       "typesafe/no-throw-sync-func": "warn",
       "typesafe/promise-catch": "error",
       "@typescript-eslint/return-await": ["error", "always"],
+      "import/default": "off",
       "prefer-destructuring": [
         "warn",
         {

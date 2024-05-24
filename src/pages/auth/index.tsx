@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./example-styles.module.css";
+import { ExampleForm } from "~/components/index.tsx";
 
-import { ExampleForm } from "~/components/index";
+import styles from "./example-styles.module.css";
 
 const Auth: React.FC = () => {
 	return (

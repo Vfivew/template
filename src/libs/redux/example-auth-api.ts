@@ -6,8 +6,8 @@ type RequestDto = {
 };
 
 type ResponseDto = {
-	id: string;
 	email: string;
+	id: string;
 	isActivated: boolean;
 };
 
@@ -18,27 +18,27 @@ type Token = {
 const baseUrl: string = import.meta.env.VITE_BASE_URL || "";
 
 export const authApi = createApi({
-	reducerPath: "auth/api",
 	baseQuery: fetchBaseQuery({
 		baseUrl: baseUrl,
 	}),
-	refetchOnFocus: true,
 	endpoints: (build) => ({
 		login: build.mutation({
 			query: (body: RequestDto) => ({
-				url: "login",
-				method: "POST",
 				body,
+				method: "POST",
+				url: "login",
 			}),
 		}),
 		loginWithGoogle: build.mutation<ResponseDto, Token>({
 			query: (body: Token) => ({
-				url: "google/login",
-				method: "POST",
 				body,
+				method: "POST",
+				url: "google/login",
 			}),
 		}),
 	}),
+	reducerPath: "auth/api",
+	refetchOnFocus: true,
 });
 
 export const { useLoginMutation, useLoginWithGoogleMutation } = authApi;
